@@ -29,5 +29,21 @@ def get_directory_content(directory_path: str) -> list:
     return to_return
 
 
+def clone_path(old_directory_path: str, new_directory_path: str, create_new_dir: bool) -> None:
+    old_dir_files = get_directory_content(old_directory_path)
+    if create_new_dir:
+        os.mkdir(new_directory_path)
+
+    for file in old_dir_files:
+        if file["type"] == "file":
+            new_dir_path = new_directory_path + "\\" + file["parent"].replace(old_directory_path, "")
+            if not os.path.exists(new_dir_path):
+                os.mkdir(new_dir_path)
+
+            f = open(new_dir_path + "\\" + file["filename"], "wb")
+            f.write(file["content"])
+            f.close()
+
+
 if __name__ == "__main__":
     pass
