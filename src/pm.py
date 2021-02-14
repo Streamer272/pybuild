@@ -1,6 +1,7 @@
 import sys
 from commands.add_modules import *
 from commands.create_project import *
+from commands.build import *
 
 args = sys.argv
 args.pop(0)
@@ -16,15 +17,21 @@ except:
         print(com)
 
 
-def main():
-    if "add-modules" == command:
+def main() -> None:
+    if "add" == command:
         try:
             args[1]
+        except:
+            print("One positional argument missing: module")
+            return None
+        try:
+            args[2]
         except:
             print("One positional argument missing: path")
             return None
 
-        add_modules(args[1])
+        add_modules(args[1], args[2])
+
     elif "create-project" == command:
         arg1 = None
         arg2 = None
@@ -45,6 +52,15 @@ def main():
                 print("One positional argument missing: path")
 
         create_project(arg1, arg2, __file__)
+
+    elif "build" == command:
+        try:
+            args[1]
+        except:
+            print("One positional argument missing: path")
+            return None
+
+        build(args[1])
 
 
 if __name__ == "__main__":

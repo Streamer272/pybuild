@@ -20,8 +20,6 @@ def create_project(project_name: str, creation_path: str, main_file_location: st
         print("You can try 'pm.exe create-project --help' to get list of existing projects")
         return None
 
-    print(projects_path + "\\" + project_name)
-    print(creation_path)
     clone_path(projects_path + "\\" + project_name, creation_path, False)
 
 
