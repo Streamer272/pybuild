@@ -1,4 +1,5 @@
 import os
+import subprocess
 
 
 def get_directory_content(directory_path: str) -> list:
@@ -43,6 +44,14 @@ def clone_path(old_directory_path: str, new_directory_path: str, create_new_dir:
             f = open(new_dir_path + "\\" + file["filename"], "wb")
             f.write(file["content"])
             f.close()
+
+
+def is_pip_installed():
+    try:
+        out = subprocess.check_output("pip --version")
+    except FileNotFoundError:
+        return False
+    return "is not recognized" not in out.decode()
 
 
 if __name__ == "__main__":

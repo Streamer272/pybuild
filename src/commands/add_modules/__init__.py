@@ -10,6 +10,14 @@ def is_module(module_name: str) -> bool:
 
 
 def add_modules(module: str, build_path: str) -> None:
+    if not os.path.exists(modules_directory + "\\" + module):
+        print("Module is not found. Downloading module...")
+        if not is_pip_installed():
+            print("Couldn't find pip, download terminated. Please install pip...")
+            return None
+        os.system("pip install " + module)
+        print("Module installed successfully...")
+
     if module != "auto":
         dir_content = get_directory_content(build_path)
 
